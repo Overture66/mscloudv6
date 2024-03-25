@@ -19,6 +19,11 @@
 
 
     <dependencies>
+        <!--SpringCloud consul discovery -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.sc.cloud</groupId>
             <artifactId>cloud-api-commons</artifactId>

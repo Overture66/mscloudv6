@@ -12,6 +12,16 @@ spring:
     url: jdbc:mysql://192.168.31.128:3308/db2024?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
+      ####Spring Cloud Consul for Service Discovery
+  cloud:
+    consul:
+      host: 192.168.31.128
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        heartbeat:
+          enabled: true
+
 
 # ========================mybatis===================
 mybatis:
