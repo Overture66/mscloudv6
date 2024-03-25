@@ -12,20 +12,12 @@ spring:
     url: jdbc:mysql://192.168.31.128:3308/db2024?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
-      ####Spring Cloud Consul for Service Discovery
-  cloud:
-    consul:
-      host: 192.168.31.128
-      port: 8500
-      discovery:
-        service-name: ${spring.application.name}
-        heartbeat:
-          enabled: true
-
+  profiles:
+    active: prod # 多环境配置加载内容dev/prod,不写就是默认default配置
 
 # ========================mybatis===================
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.atguigu.cloud.entities
+  type-aliases-package: com.sc.cloud.entities
   configuration:
     map-underscore-to-camel-case: true
