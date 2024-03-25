@@ -1,7 +1,7 @@
-package com.sc.controller;
+package com.sc.cloud.controller;
 
-import com.sc.entities.PayDTO;
-import com.sc.resp.ResultData;
+import com.sc.cloud.entities.PayDTO;
+import com.sc.cloud.resp.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
