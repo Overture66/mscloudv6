@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import com.sc.cloud.resp.ReturnCodeEnum;
 
+import java.util.concurrent.TimeUnit;
+
 @RestController
 @Tag(name = "支付微服务模块",description = "支付CRUD")
 public class PayController{
@@ -50,6 +52,11 @@ public class PayController{
     {
         if(id == -4) throw new RuntimeException("id不能为负数");
 
+        try {
+            TimeUnit.SECONDS.sleep(62);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Pay pay = payService.getById(id);
         return ResultData.success(pay);
     }
