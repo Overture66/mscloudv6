@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: cloud-payment-service
+    ####Spring Cloud Consul for Service Discovery
+  cloud:
+    consul:
+      host: 192.168.31.128
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        heartbeat:
+          enabled: true
+      config:
+        profile-separator: '-' # default value is ","，we update '-'
+        format: YAML
+        watch:
+          wait-time: 1 #为了演示实际不能改
+
+  # config/cloud-payment-service/data
+  #       /cloud-payment-service-dev/data
+  #       /cloud-payment-service-prod/data
+
