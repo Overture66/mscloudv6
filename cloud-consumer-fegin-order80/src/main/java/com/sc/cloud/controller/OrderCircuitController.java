@@ -4,11 +4,16 @@ import com.sc.cloud.api.PayFeignApi;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 @RestController
+@Slf4j
 public class OrderCircuitController {
     @Resource
     private PayFeignApi payFeignApi;
@@ -25,11 +30,11 @@ public class OrderCircuitController {
         return "myCircuitFallback，系统繁忙，请稍后再试-----/(ㄒoㄒ)/~~";
     }
 
-    /**
+   /* *//**
      *(船的)舱壁,隔离
      * @param id
      * @return
-     */
+     *//*
     @GetMapping(value = "/feign/pay/bulkhead/{id}")
     @Bulkhead(name = "cloud-payment-service",fallbackMethod = "myBulkheadFallback",type = Bulkhead.Type.SEMAPHORE)
     public String myBulkhead(@PathVariable("id") Integer id)
@@ -39,6 +44,29 @@ public class OrderCircuitController {
     public String myBulkheadFallback(Throwable t)
     {
         return "myBulkheadFallback，隔板超出最大数量限制，系统繁忙，请稍后再试-----/(ㄒoㄒ)/~~";
+    }*/
+
+    /**
+     *(船的)舱壁,隔离 threadPool
+     * @param id
+     * @return
+    */
+    @GetMapping(value = "/feign/pay/bulkhead/{id}")
+    @Bulkhead(name = "cloud-payment-service",fallbackMethod = "myBulkheadPoolFallback",type = Bulkhead.Type.THREADPOOL)
+    public CompletableFuture<String> myBulkheadThreadPool(@PathVariable("id") Integer id)
+    {
+        log.info(Thread.currentThread().getName()+"\t"+"-----开始进入");
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        log.info(Thread.currentThread().getName()+"\t"+"-----准备离开");
+        return CompletableFuture.supplyAsync(()->payFeignApi.myBulkhead(id)+"\t"+"Bulkhead.Type.THREADPOOL");
+    }
+    public CompletableFuture<String> myBulkheadPoolFallback(Throwable t)
+    {
+        return CompletableFuture.supplyAsync(()->"Bulkhead.Type.THREADPOOL，隔板超出最大数量限制，系统繁忙，请稍后再试-----/(ㄒoㄒ)/~~");
     }
 
 
