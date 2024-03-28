@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8006
 
 # ==========applicationName + druid-mysql8 driver===================
 spring:
