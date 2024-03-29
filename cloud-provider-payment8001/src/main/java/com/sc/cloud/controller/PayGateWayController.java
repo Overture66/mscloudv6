@@ -52,6 +52,14 @@ public class PayGateWayController
                 result = result+headName + "\t " + headValue +" ";
             }
         }
+        log.info("=============================================");
+        String customerId = request.getParameter("customerId");
+        log.info("request Parameter customerId: "+customerId);
+
+        String customerName = request.getParameter("customerName");
+        log.info("request Parameter customerName: "+customerName);
+        log.info("=============================================");
+
         return ResultData.success("getGatewayFilter 过滤器 test： "+result+" \t "+ DateUtil.now());
     }
 }
