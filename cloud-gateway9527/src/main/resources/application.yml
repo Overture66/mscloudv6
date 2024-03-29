@@ -47,3 +47,6 @@ spring:
             - SetRequestHeader=sec-fetch-mode, Blue-updatebysc # 将请求头sec-fetch-mode对应的值修改为Blue-updatebysc
             - AddRequestParameter=customerId,9527001 # 新增请求参数Parameter：k ，v
             - RemoveRequestParameter=customerName   # 删除url请求参数customerName，你传递过来也是null
+            - AddResponseHeader=X-Response-sc, BlueResponse # 新增请求参数X-Response-sc并设值为BlueResponse
+            - SetResponseHeader=Date,2099-11-11 # 设置回应头Date值为2099-11-11
+            - RemoveResponseHeader=Content-Type # 将默认自带Content-Type回应属性删除
