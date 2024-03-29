@@ -16,6 +16,8 @@
         <module>cloud-provider-payment8002</module>
         <module>cloud-consumer-fegin-order80</module>
         <module>cloud-gateway9527</module>
+        <module>cloudalibab-provider-9001</module>
+        <module>cloudalibaba-consumer-nacos-order83</module>
     </modules>
 
     <properties>
