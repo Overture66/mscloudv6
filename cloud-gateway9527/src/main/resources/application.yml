@@ -43,3 +43,5 @@ spring:
           filters:
             - AddRequestHeader=X-Request-sc1,scValue1  # 请求头kv，若一头含有多参则重写一行设置
             - AddRequestHeader=X-Request-sc2,scValue2
+            - RemoveRequestHeader=sec-fetch-site      # 删除请求头sec-fetch-site
+            - SetRequestHeader=sec-fetch-mode, Blue-updatebysc # 将请求头sec-fetch-mode对应的值修改为Blue-updatebysc
